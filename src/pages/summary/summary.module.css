@@ -1,0 +1,12 @@
+.summary-container {
+  margin: 12px auto;
+  color: var(--dark-purple-primary);
+}
+
+.summary-text {
+  padding: 6px 10px;
+}
+
+.action-footer {
+  margin: 16px auto 20px;
+}

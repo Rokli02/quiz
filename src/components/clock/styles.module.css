@@ -1,0 +1,66 @@
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 4px;
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  border-radius: 12px;
+}
+
+.clock-face {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background-color: var(--pink-primary);
+  border: 2px solid var(--pink-primary);
+  overflow: hidden;
+}
+
+.clock-quarter {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: var(--dark-pink-primary);
+  transform-origin: center;
+}
+
+.first-quarter {
+  left: 50%;
+  top: 0%;
+  border-top-right-radius: 100%;
+  transform-origin: bottom left;
+}
+.second-quarter {
+  left: 50%;
+  top: 50%;
+  border-bottom-right-radius: 100%;
+  transform-origin: top left;
+}
+.third-quarter {
+  left: 0%;
+  top: 50%;
+  border-bottom-left-radius: 100%;
+  transform-origin: top right;
+}
+.forth-quarter {
+  left: 0%;
+  top: 0%;
+  border-top-left-radius: 100%;
+  transform-origin: bottom right;
+}
+.secret-quarter {
+  right: 0%;
+  bottom: 100%;
+  height: 100%;
+  transform-origin: bottom right;
+  background-color: inherit;
+}
+
+.hide {
+  display: none;
+}

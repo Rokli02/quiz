@@ -1,0 +1,56 @@
+.answer-item {
+  height: fit-content;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  background-color: rgb(221, 180, 226);
+  box-shadow: 2px 2px 4px rgb(140, 69, 140);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.active-answer {
+  box-shadow: 2px 2px 4px purple;
+  background-color: rgb(228, 124, 242);
+  cursor: pointer;
+}
+
+.active-answer:hover {
+  background-color: rgb(203, 36, 241);
+  box-shadow: 2px 2px 4px rgb(172, 27, 224);
+}
+
+.highlight {
+  background-color: rgb(249 91 209);
+  /* border: 2px solid rgb(148, 41, 121); */
+  box-shadow: 2px 2px 4px rgb(163, 64, 163),
+              inset 0px 0px 4px 3px rgb(199, 69, 167);
+}
+
+.highlight:hover {
+  background-color: rgb(243 85 203);
+  box-shadow: 2px 2px 4px rgb(185, 53, 185),
+              inset 0px 0px 3px 2px rgb(179, 52, 147);
+}
+
+.wrong {
+  background-color: rgb(240, 87, 127);
+  box-shadow: 2px 2px 4px rgb(125, 17, 55);
+}
+
+.correct {
+  background-color: rgb(105, 213, 172);
+  box-shadow: 2px 2px 4px rgb(28, 107, 78);
+}
+
+.missed-correct {
+  box-shadow: 2px 2px 4px purple;
+  background-color: rgb(227, 150, 238);
+}

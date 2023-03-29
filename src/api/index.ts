@@ -1,0 +1,1 @@
+export * as QuizService from './services/quiz.service';
