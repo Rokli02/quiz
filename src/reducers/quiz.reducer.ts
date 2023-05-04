@@ -1,5 +1,5 @@
 import { QuizService } from "../api";
-import { Question } from "../models";
+import { Question, SelectedAnswer } from "../models";
 
 export const quizReducerInit: QuizReducerState = {
   counterTime: 30,
@@ -18,7 +18,7 @@ export type QuizReducerAction = {
 };
 
 type QuizReducerPayloads = {
-  selectedAnswers: number[];
+  selectedAnswers: SelectedAnswer[];
   questionCount: number;
 };
 
@@ -54,6 +54,7 @@ export function quizReducer(state: QuizReducerState, action: QuizReducerAction):
       }
 
       const questions = QuizService.getQuestions(action.payload?.questionCount || 30, state.magicWord)
+      console.log({ questions });
       const newState: QuizReducerState = {
         correctAnswers: quizReducerInit.correctAnswers,
         wrongAnswers: quizReducerInit.wrongAnswers,
@@ -89,7 +90,7 @@ export function quizReducer(state: QuizReducerState, action: QuizReducerAction):
       }
     case 'ANSWER':
       try {
-        QuizService.isAnswerRight(action.payload?.selectedAnswers as number[], state.questions?.[state.questionIndex].answers);
+        QuizService.isAnswerRight(action.payload?.selectedAnswers as SelectedAnswer[], state.questions?.[state.questionIndex].answers, state.questions[state.questionIndex].type);
 
         return {
           ...state,

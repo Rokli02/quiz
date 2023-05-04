@@ -22,6 +22,10 @@
   cursor: pointer;
 }
 
+.active-answer * {
+  cursor: pointer;
+}
+
 .active-answer:hover {
   background-color: rgb(203, 36, 241);
   box-shadow: 2px 2px 4px rgb(172, 27, 224);
@@ -53,4 +57,13 @@
 .missed-correct {
   box-shadow: 2px 2px 4px purple;
   background-color: rgb(227, 150, 238);
+}
+
+.index-delimiter {
+  width: fit-content;
+  padding-right: 0.73ch;
+  margin-right: 0.73ch;
+  font-style: italic;
+  font-weight: 600;
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
 }

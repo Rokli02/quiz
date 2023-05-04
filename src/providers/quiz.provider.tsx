@@ -1,6 +1,6 @@
 import { createContext, useContext, FC, ReactNode, useReducer } from 'react';
 import { QuizReducerAction, QuizReducerEvents, quizReducer, quizReducerInit } from '../reducers/quiz.reducer';
-import { Question } from '../models';
+import { Question, SelectedAnswer } from '../models';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export type QuizContextProps = {
@@ -14,7 +14,7 @@ export type QuizContextProps = {
   dissipate: () => void;
   tryMagicWord: (word: string) => void;
   startQuiz: (numberOfQuestions?: number, counterTime?: number) => void;
-  giveAnswer: (answers?: number[]) => void;
+  giveAnswer: (answers?: SelectedAnswer[]) => void;
   getNextQuestion: () => void;
   isLogedIn: boolean;
 }
@@ -85,7 +85,7 @@ function startQuiz(this: { dispatch: (value: QuizReducerAction) => void}, number
   this.dispatch({ type: 'START', payload: { questionCount: numberOfQuestions, counterTime } });
 }
 
-function giveAnswer(this: { dispatch: (value: QuizReducerAction) => void}, answers?: number[]) {
+function giveAnswer(this: { dispatch: (value: QuizReducerAction) => void}, answers?: SelectedAnswer[]) {
   this.dispatch({ type: 'ANSWER', payload: { selectedAnswers: answers } });
 }
 

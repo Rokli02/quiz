@@ -4,13 +4,14 @@ import { useQuiz } from '../../providers/quiz.provider';
 import { QuizReducerEvents } from '../../reducers/quiz.reducer';
 
 type AnswerProps = {
+  index?: number;
   children: ReactNode;
   highlight?: boolean;
   isCorrect?: boolean;
   onClick?: () => void;
 }
 
-export const Answer: FC<AnswerProps> = ({ children, highlight, isCorrect, onClick }) => {
+export const Answer: FC<AnswerProps> = ({ index, children, highlight, isCorrect, onClick }) => {
   const { event } = useQuiz();
 
   return (
@@ -21,7 +22,16 @@ export const Answer: FC<AnswerProps> = ({ children, highlight, isCorrect, onClic
       `}
       onClick={event !== 'correct' && event !== 'wrong' ? onClick : () => null}
     >
-      {children}
+      {
+        index !== undefined
+          ? (
+            <label className={styles["index-delimiter"]}>
+              {index}
+            </label>
+          )
+          : undefined
+      }
+      <span>{ children }</span>
     </div>
   );
 }
@@ -35,11 +45,11 @@ const evaluatedHighlight = (event: QuizReducerEvents, highlight?: boolean, isCor
     return styles["active-answer"];
   }
 
-  if ((event === 'wrong' && highlight && isCorrect) || (event === 'correct' && highlight && isCorrect)) {
+  if ((event === 'wrong' || event === 'correct') && highlight && isCorrect) {
     return styles["correct"];
   }
 
-  if (event === 'wrong' && highlight && !isCorrect) {
+  if ((event === 'wrong' || event === 'correct') && highlight && !isCorrect) {
     return styles["wrong"];
   }
 

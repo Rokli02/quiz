@@ -1,3 +1,5 @@
+import { AnswerType } from "./Answer.model";
+
 export type Question = {
   _id: number;
   question: string;
@@ -5,9 +7,5 @@ export type Question = {
   type: QuestionType;
 };
 
-export type QuestionType = 'single' | 'multi';
+export type QuestionType = 'single' | 'multi' | 'match';
 
-export type AnswerType = {
-  text: string;
-  isCorrect: boolean;
-};
