@@ -54,7 +54,6 @@ export function quizReducer(state: QuizReducerState, action: QuizReducerAction):
       }
 
       const questions = QuizService.getQuestions(action.payload?.questionCount || 30, state.magicWord)
-      console.log({ questions });
       const newState: QuizReducerState = {
         correctAnswers: quizReducerInit.correctAnswers,
         wrongAnswers: quizReducerInit.wrongAnswers,

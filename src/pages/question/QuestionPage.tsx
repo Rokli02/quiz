@@ -3,7 +3,7 @@ import inheritStyles from '../styles.module.css';
 import styles from './styles.module.css';
 import { Button, Clock, setMessage } from '../../components';
 import { useQuiz } from '../../providers/quiz.provider';
-import { QuestionType, SelectedAnswer } from '../../models';
+import { AnswerType, QuestionType, SelectedAnswer } from '../../models';
 import { useNavigate } from 'react-router-dom';
 import { QuestionAnswers } from './QuestionAnswers';
 
@@ -48,22 +48,22 @@ export const QuestionPage: FC = () => {
 }
 
 // Ne az indexet adja át, hanem a válasz objektumot
-function onClick(this: { selected: MutableRefObject<SelectedAnswer[]>, tick: Dispatch<SetStateAction<boolean>>, answer: SelectedAnswer, type: QuestionType }) {
+function onClick(this: { selected: MutableRefObject<SelectedAnswer[]>, tick: Dispatch<SetStateAction<boolean>>, answer: SelectedAnswer & AnswerType, type: QuestionType }) {
   let indexOf;
 
   switch (this.type) {
     case 'multi':
-      indexOf = this.selected.current.findIndex((s) => s.pAnswer === this.answer.pAnswer);
+      indexOf = this.selected.current.findIndex((s) => s.pAnswer === this.answer.index);
 
       if (indexOf > -1) {
         this.selected.current.splice(indexOf, 1);
       } else {
-        this.selected.current.push({ pAnswer: this.answer.pAnswer });
+        this.selected.current.push({ pAnswer: this.answer.index });
       }
 
       break;
     case 'single':
-      this.selected.current = [{ pAnswer: this.answer.pAnswer }];
+      this.selected.current = [{ pAnswer: this.answer.index }];
 
       break;
     case 'match':

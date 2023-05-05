@@ -1,6 +1,7 @@
 import { AnswerType, QuestionType, SelectedAnswer } from '../../models';
 import { Question } from '../../models';
 import datas from '../datas.json';
+import { Buffer } from 'buffer'; 
 
 export const getQuestions = (questionCount = 50, magicWord = ''): Question[] => {
   const upperBound = datas.questions.length;
@@ -157,9 +158,11 @@ export const tryMagicWord = (w?: string): void => {
     throw new Error();
   }
 
-  // Dekódolás teszt
-  if (datas.w !== w) {
+  // Dekódolás
+  const sw = Buffer.from(w).toString(process.env.REACT_APP_EC as BufferEncoding);
+
+  if (datas.w !== sw) {
     throw new Error();
   }
-  // ha hibás -> error
+
 }
