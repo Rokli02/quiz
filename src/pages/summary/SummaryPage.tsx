@@ -4,6 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import inheritStyles from '../styles.module.css';
 import styles from './summary.module.css';
 import { Button } from "../../components";
+import config from '../config';
 
 export const SummaryPage: FC = () => {
   const { correctAnswers, questionCount, reInit } = useQuiz();
@@ -26,5 +27,5 @@ export const SummaryPage: FC = () => {
 
 function getBack(this: { navigate: NavigateFunction, reInit: () => void }) {
   this.reInit();
-  this.navigate('/select', { replace: true });
+  this.navigate(config.route.select, { replace: true });
 }

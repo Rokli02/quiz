@@ -6,6 +6,7 @@ import { useQuiz } from '../../providers/quiz.provider';
 import { AnswerType, QuestionType, SelectedAnswer } from '../../models';
 import { useNavigate } from 'react-router-dom';
 import { QuestionAnswers } from './QuestionAnswers';
+import config from '../config';
 
 export const QuestionPage: FC = () => {
   const navigate = useNavigate();
@@ -20,15 +21,16 @@ export const QuestionPage: FC = () => {
     }
   }, [event])
   
-  
+  console.log('render QuestionPage');
+
   return (
     <div className={`${inheritStyles["container"]} ${styles["container"]}`}>
       <header className={styles["header-container"]}>
         <Clock
           event={event}
           counterTime={counterTime}
-          onEnd={() => navigate('/summary', { replace: true })}
-          onTimeOut={onAnswer.bind({ selected, giveAnswer })}
+          onEnd={() => navigate(config.route.summary, { replace: true })}
+          onTimeOut={onAnswer.bind({ selected, giveAnswer, force: true })}
         />
         <div className={inheritStyles["container-title"]}>{question?.question}</div>
         <div className={inheritStyles["container-title"]}>{correctAnswers + wrongAnswers}/{questionCount}</div>
@@ -47,7 +49,6 @@ export const QuestionPage: FC = () => {
   );
 }
 
-// Ne az indexet adja át, hanem a válasz objektumot
 function onClick(this: { selected: MutableRefObject<SelectedAnswer[]>, tick: Dispatch<SetStateAction<boolean>>, answer: SelectedAnswer & AnswerType, type: QuestionType }) {
   let indexOf;
 
@@ -83,8 +84,14 @@ function onClick(this: { selected: MutableRefObject<SelectedAnswer[]>, tick: Dis
   this.tick(pre => !pre);
 }
 
-function onAnswer(this: { selected: MutableRefObject<SelectedAnswer[]>, giveAnswer: (answers?: SelectedAnswer[] | undefined) => void }) {
-  if (this.selected.current?.length === 0) {
+function onAnswer(
+  this: {
+    selected: MutableRefObject<SelectedAnswer[]>,
+    giveAnswer: (answers?: SelectedAnswer[] | undefined) => void,
+    force?: boolean,
+  }
+) {
+  if (this.selected.current?.length === 0 && !this.force) {
     setMessage('Nem adtál meg választ!')
   } else {
     this.giveAnswer(this.selected.current);

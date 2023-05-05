@@ -4,6 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Button, Input, setMessage } from "../../components";
 import inheritStyles from '../styles.module.css';
 import styles from './styles.module.css';
+import config from '../config';
 
 let timer: NodeJS.Timeout | undefined;
 
@@ -37,7 +38,7 @@ if (timer) {
 const numberOfQuestions = (e.target as any)['question-count']?.value;
 const counterTime = (e.target as any)['round-time']?.value;
 setMessage('Jönnek a kérdések');
-this.navigate('/question', { replace: true });
+this.navigate(config.route.question, { replace: true });
 timer = setTimeout(() => {
   this.startQuiz(Number(numberOfQuestions), Number(counterTime))
 }, 2500);

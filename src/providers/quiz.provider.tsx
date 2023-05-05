@@ -2,6 +2,7 @@ import { createContext, useContext, FC, ReactNode, useReducer } from 'react';
 import { QuizReducerAction, QuizReducerEvents, quizReducer, quizReducerInit } from '../reducers/quiz.reducer';
 import { Question, SelectedAnswer } from '../models';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import config from '../pages/config';
 
 export type QuizContextProps = {
   counterTime: number;
@@ -74,7 +75,7 @@ function reInit(this: { dispatch: (value: QuizReducerAction) => void}) {
 
 function dissipate(this: { dispatch: (value: QuizReducerAction) => void, navigate: NavigateFunction }) {
   this.dispatch({ type: 'DISSIPATE' });
-  this.navigate('/', { replace: true });
+  this.navigate(config.base, { replace: true });
 }
 
 function tryMagicWord(this: { dispatch: (value: QuizReducerAction) => void}, word: string) {

@@ -16,6 +16,9 @@ export const Clock: FC<ClockProps> = ({ counterTime, onEnd, onTimeOut, event }) 
   const timer = useRef<{ timer: any; timeout: any }>({ timer: undefined, timeout: undefined });
 
   useEffect(() => {
+    clearInterval(timer.current.timer);
+    clearTimeout(timer.current.timeout);
+
     if (event === 'start' || event === 'next') {
       timer.current.timer = undefined;
       setTime(counterTime);
@@ -23,12 +26,12 @@ export const Clock: FC<ClockProps> = ({ counterTime, onEnd, onTimeOut, event }) 
         setTick((pre) => !pre);
       }, 20);
     } else if (event === 'correct' || event === 'wrong') {
-      clearInterval(timer.current.timer);
-      clearTimeout(timer.current.timeout);
+      // clearInterval(timer.current.timer);
+      // clearTimeout(timer.current.timeout);
       setTick((pre) => !pre);
       timer.current.timer = null;
     } else if (event === 'end') {
-      clearInterval(timer.current.timer);
+      // clearInterval(timer.current.timer);
       setTick((pre) => !pre);
       timer.current.timer = undefined;
       onEnd?.();
@@ -58,6 +61,17 @@ export const Clock: FC<ClockProps> = ({ counterTime, onEnd, onTimeOut, event }) 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
+  useEffect(() => {
+    const timerObj = timer.current;
+
+    return () => {
+      clearInterval(timerObj.timer);
+      clearTimeout(timerObj.timeout);
+      
+    }
+  }, [])
+
+  console.log('render Clock')
 
   return (
     <div className={`${styles["clock-container"]} másik`}>

@@ -6,6 +6,7 @@ import { Button } from "../../components";
 import { useQuiz } from "../../providers/quiz.provider";
 import { useNavigate } from "react-router-dom";
 import { setMessage } from "../../components";
+import config from '../config';
 
 function onSubmit(this: { tryMagicWord: (word: string) => void }, e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
@@ -21,7 +22,7 @@ export const HomePage: FC = () => {
     if (event === 'correct') {
       setMessage('Eltaláltad a varázsszót!', 'success');
       reInit();
-      navigate('/select', { replace: true });
+      navigate(config.route.select, { replace: true });
     } else if (event === 'wrong') {
       setMessage('Nem nyert, még próbálkozz!', 'error');
       reInit();
